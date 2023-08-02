@@ -2,14 +2,14 @@ name: deploy to lambda
 on:
   push:
     branches:
-    - master
+    - main
 
 jobs:
   deploy_source:
     name: build and deploy lambda
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [18.x]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -33,5 +33,5 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ap-south-1
-          function_name: lambda-github-action
+          function_name: nodejs-lambda-function
           zip_file: bundle.zip
